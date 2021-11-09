@@ -1,20 +1,32 @@
 import React, {useState}from 'react';
-import {Button,TextField,Switch,FormControlLabel} from "@material-ui/core";
+import {TextField,Button,Switch,FormControlLabel} from "@material-ui/core";
 
 
-function DadosPessoais(aoEnviar,validarCPF) {
+function DadosPessoais({aoEnviar, validaçoes}) {
     const [nome,setNome] = useState("");
     const [sobrenome,setSobrenome] = useState("");
-    const [CPF,setCPF] = useState("");
+    const [cpf,setCpf] = useState("");
     const [promoçoes,setPromoçoes] = useState(true);
-    const [novidades,setNovidades] = useState(true);
+    const [novidades,setNovidades] = useState(false);
     const [erros,setErros] = useState({cpf:{valido:true, text:""}});
+
+    function validarCampos(event){
+        console.log (event.target);
+            const{name , value} = event.target
+            const novoEstado = {...erros}
+            novoEstado[name] = validaçoes[name](value);
+            setErros(novoEstado);
+            console.log (novoEstado);
+    }
+
+
+
 
 return(
 <form  
     onSubmit={(event)=>{
         event.preventDefault();
-        aoEnviar({nome,sobrenome,CPF,promoçoes,novidades})
+        aoEnviar({nome,sobrenome,cpf,novidades,promoçoes})
         } }
  >
 
@@ -43,19 +55,15 @@ return(
             />
             
         <TextField
-         value={CPF}
+         value={cpf}
          onChange={(event)=> {
-             setCPF(event.target.value);
+             setCpf(event.target.value);
             }}
-
-            onBlur={(event)=>{
-                const ehValido = validarCPF(CPF);
-                setErros({cpf:ehValido});
-            }}
-
+            onBlur={validarCampos}
             error={!erros.cpf.valido}
             helperText={erros.cpf.texto}
             id="CPF" 
+            name="cpf"
             label="CPF" 
             variant="outlined" 
             margin ="normal" 
@@ -100,15 +108,6 @@ return(
 </form>
     );
 
-
-
-    function validarCPF(cpf){
-        if(cpf.lenght !==11){
-          return {valido:false,texto:"CPF deve ter 11 digitos."}
-        }else{
-          return{valido:true,texto:""}
-           }
-        }
 }
 
 

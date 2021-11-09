@@ -19,14 +19,14 @@ class App extends Component{
   
 }
 function aoEnviarForm(dados){
-  console.log(dados)
+  console.log(dados);
 }
 
 function validarCPF(cpf){
-  if(cpf.lenght !==11){
-    return {valido:false,texto:"CPF deve ter 11 digitos."}
+  if(cpf.lenght !== 11){
+    return {valido:false, texto:"CPF deve ter 11 digitos."}
   }else{
-    return{valido:true,texto:""}
+    return{valido:true, texto:""}
      }
   }
 
