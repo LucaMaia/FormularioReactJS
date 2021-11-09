@@ -36,6 +36,7 @@ return(
             setNome(event.target.value);        
         }}
             id="nome"
+            name= "nome"
             label="Nome" 
             variant="outlined"
             margin ="normal" 
@@ -48,6 +49,7 @@ return(
             setSobrenome(event.target.value);
            }}
             id="Sobrenome"
+            name= "sobrenome"
             label="Sobrenome"
             variant="outlined"
             margin ="normal" 
@@ -71,8 +73,8 @@ return(
         />
 
     <FormControlLabel 
-    
-        label="Promoções"
+        name= "promoçoes"
+        label="Promoçoes"
         control={
         <Switch 
         checked={promoçoes}

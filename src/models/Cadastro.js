@@ -15,4 +15,4 @@ function validarCPF(cpf){
     }
 
 
-    export {validarCPF, validarSenha}
+    export {validarCPF, validarSenha};
